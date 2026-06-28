@@ -88,7 +88,7 @@ export default function AsistentePlanificacion() {
         reader.readAsDataURL(file);
       });
 
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
+      const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -113,7 +113,7 @@ export default function AsistentePlanificacion() {
       setVista("chat");
       setMensajes([{
         rol: "asistente",
-        texto: `¡Hola! 💪 Ya leí tu planificación. Estoy lista para ayudarte con cualquier duda sobre los ejercicios, cómo ejecutarlos, RPE, series, tiempos... ¡o lo que necesites! También puedo enviarte los videos de Juliana cuando lo necesites. ¿Qué querés consultar?`
+        texto: ¡Hola! 💪 Ya leí tu planificación. Estoy lista para ayudarte con cualquier duda sobre los ejercicios, cómo ejecutarlos, RPE, series, tiempos... ¡o lo que necesites! También puedo enviarte los videos de Juliana cuando lo necesites. ¿Qué querés consultar?
       }]);
     } catch {
       alert("Hubo un error al leer el PDF. Intenta de nuevo.");
@@ -186,7 +186,7 @@ export default function AsistentePlanificacion() {
     try {
       const system = SYSTEM_PROMPT.replace("{PLAN}", planTexto);
       const msgs = historial.map(m => ({ role: m.rol === "usuario" ? "user" : "assistant", content: m.texto }));
-      const res = await fetch("https://api.anthropic.com/v1/messages", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-6", max_tokens: 1000, system, messages: msgs })
@@ -283,7 +283,7 @@ export default function AsistentePlanificacion() {
                 <div style={s.avatar}>JS</div>
                 <div style={{ ...s.bubble, ...s.bubbleBot, display: "flex", gap: 5, alignItems: "center", padding: "14px 18px" }}>
                   {[0, 0.2, 0.4].map((d, i) => (
-                    <span key={i} style={{ width: 7, height: 7, borderRadius: "50%", background: "#C4A882", display: "inline-block", animation: `pulse 1.2s infinite ${d}s` }} />
+                    <span key={i} style={{ width: 7, height: 7, borderRadius: "50%", background: "#C4A882", display: "inline-block", animation: pulse 1.2s infinite ${d}s }} />
                   ))}
                 </div>
               </div>
@@ -342,7 +342,7 @@ const s = {
   eyebrow: { fontSize:12, fontWeight:600, letterSpacing:"0.12em", textTransform:"uppercase", color:OLIVE, margin:"0 0 10px" },
   headline: { fontSize:32, fontWeight:700, color:DARK, margin:"0 0 12px", letterSpacing:"-0.8px", lineHeight:1.1 },
   subtext: { fontSize:15, color:MID, lineHeight:1.65, margin:"0 0 28px" },
-  dropZone: { border:`2px dashed ${ACCENT}`, borderRadius:16, padding:"40px 24px", cursor:"pointer", background:"white", transition:"all 0.2s", marginBottom:20 },
+  dropZone: { border:2px dashed ${ACCENT}, borderRadius:16, padding:"40px 24px", cursor:"pointer", background:"white", transition:"all 0.2s", marginBottom:20 },
   dropZoneActive: { borderColor:OLIVE, background:"#F0F3E8" },
   dropZoneLoading: { cursor:"default", opacity:0.8 },
   dropContent: { display:"flex", flexDirection:"column", alignItems:"center", gap:8 },
@@ -350,7 +350,7 @@ const s = {
   dropMain: { fontSize:16, fontWeight:600, color:DARK, margin:0 },
   dropSub: { fontSize:13, color:MID, margin:0 },
   loadingState: { display:"flex", flexDirection:"column", alignItems:"center", gap:14 },
-  spinner: { width:36, height:36, border:`3px solid #E8E4DA`, borderTop:`3px solid ${OLIVE}`, borderRadius:"50%", animation:"spin 0.8s linear infinite" },
+  spinner: { width:36, height:36, border:3px solid #E8E4DA, borderTop:3px solid ${OLIVE}, borderRadius:"50%", animation:"spin 0.8s linear infinite" },
   loadingText: { fontSize:14, color:MID, margin:0, fontWeight:500 },
   tagRow: { display:"flex", justifyContent:"center", gap:8, flexWrap:"wrap" },
   tag: { background:"white", border:"1px solid #E0DDD5", borderRadius:20, padding:"4px 12px", fontSize:12, color:MID, fontWeight:500 },
